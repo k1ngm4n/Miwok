@@ -3,16 +3,12 @@ package com.example.android.miwok;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
-/**
- * Created by KingMan on 26-Jul-17.
- */
+class MediaControl {
 
-public class MediaControl {
+    static MediaPlayer mMediaPlayer;
+    static AudioManager mAudioManager;
 
-    public static MediaPlayer mMediaPlayer;
-    public static AudioManager mAudioManager;
-
-    public static void releaseMediaPlayer() {
+    static void releaseMediaPlayer() {
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
             mMediaPlayer = null;
@@ -21,7 +17,7 @@ public class MediaControl {
         }
     }
 
-    public static AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+    static AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
             if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
@@ -32,6 +28,9 @@ public class MediaControl {
                 // both cases the same way because our app is playing short sound files.
 
                 mMediaPlayer.pause();
+                mMediaPlayer.pause();
+                mMediaPlayer.pause();
+                mMediaPlayer.pause();
                 mMediaPlayer.seekTo(0);
             } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 mMediaPlayer.start();
@@ -41,7 +40,7 @@ public class MediaControl {
         }
     };
 
-    public static MediaPlayer.OnCompletionListener mCompleteListener = new MediaPlayer.OnCompletionListener() {
+    static MediaPlayer.OnCompletionListener mCompleteListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             releaseMediaPlayer();
